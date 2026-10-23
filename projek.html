@@ -4,54 +4,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daftar projek yang pernah dikerjakan oleh Ficky Malvialudin.">
     <title>Modul 2 - Daftar Projek</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
-        <h1>Daftar Projek Saya</h1>
-        <nav>
+    <a class="skip-link" href="#konten">Lewati ke konten</a>
+
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Beranda Ficky Malvialudin">
+            <span class="brand-mark" aria-hidden="true">FM</span>
+            <span class="brand-text">
+                <strong>Ficky Malvialudin</strong>
+                <span>Web Developer</span>
+            </span>
+        </a>
+
+        <nav class="main-nav" aria-label="Navigasi utama">
             <ul>
                 <li><a href="index.html">Beranda</a></li>
                 <li><a href="kontak.html">Hubungi Saya</a></li>
-                <li><a href="projek.html">Projek</a></li>
+                <li><a class="active" href="projek.html" aria-current="page">Projek</a></li>
                 <li><a href="aset.html">Aset</a></li>
             </ul>
         </nav>
     </header>
 
-    <hr>
+    <main id="konten" class="page">
+        <section class="page-hero" aria-labelledby="projek-title">
+            <span class="eyebrow">Portofolio · 2026</span>
+            <h1 id="projek-title">Daftar Projek Saya</h1>
+            <p>Kelola proyek yang pernah dan sedang saya kerjakan. Tambahkan proyek baru, cari berdasarkan judul, lalu
+                perbarui status atau hapus proyek langsung dari halaman ini.</p>
+        </section>
 
-    <main>
-        <section id="proyek">
-            <h2>Projek yang Pernah Dikerjakan</h2>
+        <section class="section section--flush" aria-labelledby="form-title">
+            <div class="section-head">
+                <div>
+                    <span class="eyebrow">Input</span>
+                    <h2 id="form-title">Tambah Proyek</h2>
+                </div>
+                <p>Isi data proyek dengan lengkap. Judul wajib diisi dan estimasi anggaran harus lebih besar dari 0.</p>
+            </div>
 
-            <article>
-                <header>
-                    <h3>1. Sistem Manajemen Inventori Database</h3>
-                    <p>Teknologi: HTML, CSS, JavaScript, MySQL | Tahun: 2026</p>
-                </header>
-                <p>Aplikasi web berbasis lokal untuk mencatat dan mengelola sirkulasi barang secara efisien
-                    terintegrasi dengan database MySQL.</p>
-            </article>
+            <div class="project-form-section">
+                <form id="project-form" class="project-form" novalidate>
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="project-title">Judul Proyek</label>
+                            <input type="text" id="project-title" name="title" placeholder="Contoh: Sistem Inventaris"
+                                autocomplete="off">
+                        </div>
 
-            <article>
-                <header>
-                    <h3>2. Aplikasi Kasir &amp; Perhitungan Transaksi</h3>
-                    <p>Teknologi: JavaScript ES6+ | Tahun: 2026</p>
-                </header>
-                <p>Program logika pemrosesan transaksi belanja yang menghitung total bayar dan diskon berbasis Array
-                    of Objects.</p>
-            </article>
+                        <div class="field">
+                            <label for="project-category">Kategori</label>
+                            <select id="project-category" name="category">
+                                <option value="Web App">Web App</option>
+                                <option value="Mobile App">Mobile App</option>
+                                <option value="Desktop App">Desktop App</option>
+                                <option value="UI/UX Design">UI/UX Design</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="project-budget">Estimasi Anggaran (Rp)</label>
+                            <input type="number" id="project-budget" name="budget" min="1" step="1000"
+                                placeholder="Contoh: 2500000">
+                        </div>
+
+                        <div class="field checkbox-field">
+                            <input type="checkbox" id="project-done" name="completed">
+                            <label for="project-done">Sudah Selesai</label>
+                        </div>
+                    </div>
+
+                    <p class="form-error" id="form-error" role="alert"></p>
+
+                    <div class="form-actions">
+                        <button class="btn btn-primary" type="submit">Tambah Proyek</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="stat-grid" aria-label="Statistik proyek">
+                <div class="stat-card">
+                    <span class="stat-card__label">Total Proyek</span>
+                    <span class="stat-card__value" id="stat-total">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__label">Sudah Selesai</span>
+                    <span class="stat-card__value" id="stat-done">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__label">Dalam Pengerjaan</span>
+                    <span class="stat-card__value" id="stat-pending">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card__label">Total Anggaran</span>
+                    <span class="stat-card__value" id="stat-budget">Rp 0</span>
+                </div>
+            </div>
+
+            <div class="section-head">
+                <div>
+                    <span class="eyebrow">Daftar</span>
+                    <h2 id="daftar-projek">Projek yang Pernah Dikerjakan</h2>
+                </div>
+                <p>Gunakan pencarian untuk menyaring proyek berdasarkan judul secara langsung.</p>
+            </div>
+
+            <div class="project-toolbar">
+                <input class="search-bar" type="search" id="project-search" placeholder="Cari berdasarkan judul proyek..."
+                    aria-label="Cari proyek berdasarkan judul" autocomplete="off">
+            </div>
+
+            <div id="project-list" class="card-grid" aria-live="polite"></div>
+        </section>
+
+        <section class="cta-panel" aria-labelledby="cta-title">
+            <div>
+                <span class="eyebrow">Kolaborasi</span>
+                <h2 id="cta-title">Tertarik bekerja sama?</h2>
+                <p>Ceritakan kebutuhan proyek Anda dan mari kita rancang solusi web yang tepat.</p>
+            </div>
+            <a class="btn btn-primary" href="kontak.html">Hubungi Saya</a>
         </section>
     </main>
 
-    <hr>
-
-    <footer>
+    <footer class="site-footer">
+        <p><strong>Ficky Malvialudin</strong> — Portofolio Mahasiswa</p>
         <p>&copy; 2026 Teknik Informatika ITG</p>
     </footer>
+
+    <script>
+        let projects = [
+            {
+                id: 1,
+                title: "Sistem Manajemen Inventori Database",
+                category: "Web App",
+                budget: 2500000,
+                completed: true,
+                desc: "Aplikasi web berbasis lokal untuk mencatat dan mengelola sirkulasi barang secara efisien terintegrasi dengan database MySQL.",
+                tech: "HTML, CSS, JavaScript, MySQL",
+                year: 2026
+            },
+            {
+                id: 2,
+                title: "Aplikasi Kasir & Perhitungan Transaksi",
+                category: "Desktop App",
+                budget: 4500000,
+                completed: false,
+                desc: "Program logika pemrosesan transaksi belanja yang menghitung total bayar dan diskon berbasis Array of Objects.",
+                tech: "JavaScript ES6+",
+                year: 2026
+            }
+        ];
+
+        let searchTerm = "";
+
+        const projectForm = document.getElementById("project-form");
+        const titleInput = document.getElementById("project-title");
+        const categoryInput = document.getElementById("project-category");
+        const budgetInput = document.getElementById("project-budget");
+        const doneInput = document.getElementById("project-done");
+        const formError = document.getElementById("form-error");
+        const searchInput = document.getElementById("project-search");
+        const projectList = document.getElementById("project-list");
+        const statTotal = document.getElementById("stat-total");
+        const statDone = document.getElementById("stat-done");
+        const statPending = document.getElementById("stat-pending");
+        const statBudget = document.getElementById("stat-budget");
+
+        const formatRupiah = (angka) => {
+            return new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR",
+                maximumFractionDigits: 0
+            }).format(angka);
+        };
+
+        function renderStats() {
+            const total = projects.length;
+            const done = projects.filter((project) => project.completed).length;
+            const pending = total - done;
+            const totalBudget = projects.reduce((sum, project) => sum + Number(project.budget || 0), 0);
+
+            statTotal.textContent = total;
+            statDone.textContent = done;
+            statPending.textContent = pending;
+            statBudget.textContent = formatRupiah(totalBudget);
+        }
+
+        function createProjectCard(project) {
+            const article = document.createElement("article");
+            article.className = "project-card";
+
+            const header = document.createElement("header");
+            const kicker = document.createElement("span");
+            kicker.className = "project-kicker";
+            kicker.textContent = project.category;
+
+            const title = document.createElement("h3");
+            title.textContent = project.title;
+
+            const meta = document.createElement("p");
+            meta.className = "meta";
+            meta.textContent = `${project.tech} | Tahun: ${project.year}`;
+
+            header.append(kicker, title, meta);
+
+            const description = document.createElement("p");
+            description.textContent = project.desc;
+
+            const facts = document.createElement("div");
+            facts.className = "project-facts";
+
+            const budget = document.createElement("span");
+            budget.textContent = `Anggaran: ${formatRupiah(project.budget)}`;
+
+            const status = document.createElement("span");
+            status.className = project.completed ? "project-status is-done" : "project-status";
+            status.textContent = project.completed ? "Selesai" : "Dalam Pengerjaan";
+
+            facts.append(budget, status);
+
+            const actions = document.createElement("div");
+            actions.className = "project-card__actions";
+
+            const toggleButton = document.createElement("button");
+            toggleButton.type = "button";
+            toggleButton.className = "btn btn-sm btn-action";
+            toggleButton.dataset.action = "toggle";
+            toggleButton.dataset.id = String(project.id);
+            toggleButton.textContent = "Ubah Status";
+
+            const deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.className = "btn btn-sm btn-danger";
+            deleteButton.dataset.action = "delete";
+            deleteButton.dataset.id = String(project.id);
+            deleteButton.textContent = "Hapus Proyek";
+
+            actions.append(toggleButton, deleteButton);
+
+            article.append(header, description, facts, actions);
+
+            return article;
+        }
+
+        function renderProjects() {
+            const filteredProjects = projects.filter((project) =>
+                project.title.toLowerCase().includes(searchTerm)
+            );
+
+            projectList.replaceChildren();
+
+            if (filteredProjects.length === 0) {
+                const emptyState = document.createElement("p");
+                emptyState.className = "empty-state";
+                emptyState.textContent = searchTerm
+                    ? "Tidak ada proyek yang cocok dengan pencarian."
+                    : "Belum ada proyek. Tambahkan proyek pertama Anda melalui form di atas.";
+                projectList.append(emptyState);
+                return;
+            }
+
+            filteredProjects.forEach((project) => {
+                projectList.append(createProjectCard(project));
+            });
+        }
+
+        function renderAll() {
+            renderStats();
+            renderProjects();
+        }
+
+        projectForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const title = titleInput.value.trim();
+            const budget = Number(budgetInput.value);
+
+            if (!title) {
+                formError.textContent = "Judul proyek tidak boleh kosong.";
+                titleInput.focus();
+                return;
+            }
+
+            if (!Number.isFinite(budget) || budget <= 0) {
+                formError.textContent = "Estimasi anggaran harus lebih besar dari 0.";
+                budgetInput.focus();
+                return;
+            }
+
+            formError.textContent = "";
+
+            const category = categoryInput.value;
+            const newProject = {
+                id: Date.now(),
+                title: title,
+                category: category,
+                budget: budget,
+                completed: doneInput.checked,
+                desc: `Proyek ${category} yang dikelola dalam portofolio ini.`,
+                tech: category,
+                year: new Date().getFullYear()
+            };
+
+            projects = [newProject, ...projects];
+            projectForm.reset();
+            renderAll();
+        });
+
+        searchInput.addEventListener("input", () => {
+            searchTerm = searchInput.value.trim().toLowerCase();
+            renderProjects();
+        });
+
+        projectList.addEventListener("click", (event) => {
+            const button = event.target.closest("button[data-action]");
+
+            if (!button) {
+                return;
+            }
+
+            const id = Number(button.dataset.id);
+
+            if (button.dataset.action === "toggle") {
+                const project = projects.find((item) => item.id === id);
+
+                if (!project) {
+                    return;
+                }
+
+                project.completed = !project.completed;
+            } else if (button.dataset.action === "delete") {
+                projects = projects.filter((item) => item.id !== id);
+            }
+
+            renderAll();
+        });
+
+        renderAll();
+    </script>
 </body>
 
 </html>

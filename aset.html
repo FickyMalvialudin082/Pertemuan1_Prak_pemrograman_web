@@ -4,42 +4,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aset digital dan akun yang dimiliki Ficky Malvialudin.">
     <title>Modul 2 - Aset Saya</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
-        <h1>Aset Saya</h1>
-        <nav>
+    <a class="skip-link" href="#konten">Lewati ke konten</a>
+
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Beranda Ficky Malvialudin">
+            <span class="brand-mark" aria-hidden="true">FM</span>
+            <span class="brand-text">
+                <strong>Ficky Malvialudin</strong>
+                <span>Web Developer</span>
+            </span>
+        </a>
+
+        <nav class="main-nav" aria-label="Navigasi utama">
             <ul>
                 <li><a href="index.html">Beranda</a></li>
                 <li><a href="kontak.html">Hubungi Saya</a></li>
                 <li><a href="projek.html">Projek</a></li>
-                <li><a href="aset.html">Aset</a></li>
+                <li><a class="active" href="aset.html" aria-current="page">Aset</a></li>
             </ul>
         </nav>
     </header>
 
-    <hr>
+    <main id="konten" class="page">
+        <section class="page-hero" aria-labelledby="aset-title">
+            <span class="eyebrow">Aset Digital</span>
+            <h1 id="aset-title">Aset Saya</h1>
+            <p>Beberapa aset digital yang saya miliki dan kelola, termasuk akun permainan yang saya gunakan untuk
+                bermain sekaligus membuka layanan joki.</p>
+        </section>
 
-    <main>
-        <section id="aset">
-            <h2>Aset Saya</h2>
-
-            <article>
-                <header>
-                    <h3>1. Akun ML</h3>
-                    <p>Teknologi: HP</p>
-                </header>
+        <section class="section section--flush" aria-labelledby="akun-ml-title">
+            <div class="asset-card">
+                <div class="asset-head">
+                    <span class="asset-mark" aria-hidden="true">ML</span>
+                    <div>
+                        <span class="project-kicker">Akun Game</span>
+                        <h2 id="akun-ml-title">1. Akun ML</h2>
+                        <p class="meta">Teknologi: HP</p>
+                    </div>
+                </div>
                 <p>Terima joki jika bosan menang.</p>
-            </article>
+                <ul class="chip-list" aria-label="Detail aset">
+                    <li class="chip">Mobile Legends</li>
+                    <li class="chip">Layanan Joki</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="cta-panel" aria-labelledby="cta-title">
+            <div>
+                <span class="eyebrow">Layanan</span>
+                <h2 id="cta-title">Butuh bantuan joki?</h2>
+                <p>Hubungi saya untuk informasi lebih lanjut mengenai layanan dan ketersediaan.</p>
+            </div>
+            <a class="btn btn-primary" href="kontak.html">Hubungi Saya</a>
         </section>
     </main>
 
-    <hr>
-
-    <footer>
+    <footer class="site-footer">
+        <p><strong>Ficky Malvialudin</strong> — Portofolio Mahasiswa</p>
         <p>&copy; 2026 Teknik Informatika ITG</p>
     </footer>
 </body>

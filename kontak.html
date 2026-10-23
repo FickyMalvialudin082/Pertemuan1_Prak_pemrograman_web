@@ -4,66 +4,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Formulir kontak untuk mengirim pesan atau penawaran proyek kepada Ficky Malvialudin.">
     <title>Modul 2 - Form Kontak</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bodi">
-    <header>
-        <h1 class="kontak">Formulir Kontak</h1>
-        <nav>
+<body>
+    <a class="skip-link" href="#konten">Lewati ke konten</a>
+
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Beranda Ficky Malvialudin">
+            <span class="brand-mark" aria-hidden="true">FM</span>
+            <span class="brand-text">
+                <strong>Ficky Malvialudin</strong>
+                <span>Web Developer</span>
+            </span>
+        </a>
+
+        <nav class="main-nav" aria-label="Navigasi utama">
             <ul>
                 <li><a href="index.html">Beranda</a></li>
-                <li><a href="kontak.html">Hubungi Saya</a></li>
+                <li><a class="active" href="kontak.html" aria-current="page">Hubungi Saya</a></li>
                 <li><a href="projek.html">Projek</a></li>
                 <li><a href="aset.html">Aset</a></li>
             </ul>
         </nav>
     </header>
 
-    <hr>
+    <main id="konten" class="page">
+        <section class="page-hero" aria-labelledby="kontak-title">
+            <span class="eyebrow">Kontak</span>
+            <h1 id="kontak-title">Formulir Kontak</h1>
+            <p>Punya pertanyaan, ide kolaborasi, atau penawaran proyek? Kirimkan pesan melalui formulir di bawah ini.</p>
+        </section>
 
-    <main>
-        <section class="luar">
-            <h2 class="h2kontak">Kirimkan Pesan atau Penawaran Proyek</h2>
+        <section class="section section--flush" aria-labelledby="form-title">
+            <div class="contact-wrap">
+                <aside class="panel contact-aside">
+                    <span class="eyebrow">Mari Terhubung</span>
+                    <h2 id="form-title">Kirimkan Pesan atau Penawaran Proyek</h2>
+                    <p>Isi formulir dengan detail kebutuhan Anda. Saya akan berusaha merespons secepat mungkin.</p>
 
-            <form>
-                <p>
-                    <label for="nama_pengirim">Nama Lengkap Anda:</label><br>
-                    <input class="kotak" type="text" id="nama_pengirim" name="nama_pengirim">
-                </p>
+                    <ul class="contact-list">
+                        <li>
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:2406082@itg.ac.id">2406082@itg.ac.id</a>
+                        </li>
+                        <li>
+                            <span class="contact-label">Lokasi</span>
+                            <span class="contact-value">Garut, Jawa Barat</span>
+                        </li>
+                        <li>
+                            <span class="contact-label">Status</span>
+                            <span class="status-pill"><span class="status-dot" aria-hidden="true"></span>Tersedia untuk
+                                freelance</span>
+                        </li>
+                    </ul>
+                </aside>
 
-                <p>
-                    <label for="email_pengirim">Alamat Email:</label><br>
-                    <input class="email" type="email" id="email_pengirim" name="email_pengirim">
-                </p>
+                <div class="panel form-card">
+                    <form aria-labelledby="form-title">
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="nama_pengirim">Nama Lengkap Anda:</label>
+                                <input type="text" id="nama_pengirim" name="nama_pengirim"
+                                    placeholder="Masukkan nama lengkap" autocomplete="name">
+                            </div>
 
-                <p>
-                    <label for="jenis_layanan">Layanan yang Dibutuhkan:</label><br>
-                    <select class="layanan" id="jenis_layanan" name="jenis_layanan">
-                        <option value=""></option>
-                        <option value="web">Pembuatan Web</option>
-                        <option value="app">Pengembangan Aplikasi</option>
-                        <option value="other">Lain-lain</option>
-                    </select>
-                </p>
+                            <div class="field">
+                                <label for="email_pengirim">Alamat Email:</label>
+                                <input type="email" id="email_pengirim" name="email_pengirim"
+                                    placeholder="nama@email.com" autocomplete="email">
+                            </div>
+                        </div>
 
-                <p>
-                    <label for="pesan">Pesan:</label><br>
-                    <textarea id="pesan" name="pesan" rows="6" cols="50"></textarea>
-                </p>
+                        <div class="field">
+                            <label for="jenis_layanan">Layanan yang Dibutuhkan:</label>
+                            <select id="jenis_layanan" name="jenis_layanan">
+                                <option value="">Pilih layanan</option>
+                                <option value="web">Pembuatan Web</option>
+                                <option value="app">Pengembangan Aplikasi</option>
+                                <option value="other">Lain-lain</option>
+                            </select>
+                        </div>
 
-                <p>
-                    <button class="kirim" type="submit">Kirim Pesan</button>
-                    <button class="bata" type="reset">Batal / Reset</button>
-                </p>
-            </form>
+                        <div class="field">
+                            <label for="pesan">Pesan:</label>
+                            <textarea id="pesan" name="pesan" rows="6" cols="50"
+                                placeholder="Ceritakan kebutuhan atau ide proyek Anda..."></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn btn-primary" type="submit">Kirim Pesan</button>
+                            <button class="btn btn-reset" type="reset">Batal / Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </section>
     </main>
 
-    <hr>
-
-    <footer>
+    <footer class="site-footer">
+        <p><strong>Ficky Malvialudin</strong> — Portofolio Mahasiswa</p>
         <p>&copy; 2026 Teknik Informatika ITG</p>
     </footer>
 </body>
