@@ -1,109 +1,59 @@
+// File: script.js
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Ambil elemen DOM
-  const todoForm = document.querySelector("#todoForm");
-  const taskInput = document.querySelector("#taskInput");
-  const inputError = document.querySelector("#inputError");
-  const todoList = document.querySelector("#todoList");
-  const taskCounter = document.querySelector("#taskCounter");
-  const clearCompletedBtn = document.querySelector("#clearCompletedBtn");
+  // 1. Tangkap elemen DOM
+  const btnFetch = document.querySelector("#btnFetch");
+  const statusMessage = document.querySelector("#statusMessage");
+  const userList = document.querySelector("#userList");
 
-  // 2. Fungsi membaca dan menyimpan ke LocalStorage
-  const getTasks = () => JSON.parse(localStorage.getItem("todo_tasks")) || [];
-  const saveTasks = (tasks) => localStorage.setItem("todo_tasks", JSON.stringify(tasks));
+  // 2. Fungsi Asinkronus untuk Mengambil Data Pengguna dari Server API
+  const fetchUsers = async () => {
+    // A. Tampilkan status loading saat proses dimulai
+    btnFetch.disabled = true;
+    statusMessage.textContent = "Sedang memuat data dari server...";
+    statusMessage.className = "status-msg";
+    userList.innerHTML = "";
 
-  // Fitur 1: Fungsi pembaruan Task Counter
-  const updateTaskCounter = (tasks) => {
-    const total = tasks.length;
-    const completed = tasks.filter((t) => t.completed).length;
-    const pending = total - completed;
+    try {
+      // B. Kirim HTTP Request ke URL API
+      const response = await fetch("https://jsonplaceholder.typicode.com/users");
 
-    taskCounter.textContent = `Total: ${total} Tugas | Selesai: ${completed} | Belum Selesai: ${pending}`;
+      // C. Cek apakah server merespons dengan sukses
+      if (!response.ok) {
+        throw new Error(`Gagal mengambil data! Status HTTP: ${response.status}`);
+      }
+
+      // D. Konversi respons JSON menjadi array objek JavaScript
+      const users = await response.json();
+
+      // E. Render data pengguna ke tampilan kartu HTML
+      statusMessage.textContent = `Berhasil memuat ${users.length} data pengguna!`;
+      renderUsers(users);
+    } catch (error) {
+      // F. Tangani jika terjadi error jaringan atau URL salah
+      statusMessage.textContent = `Gagal memuat data: ${error.message}`;
+      statusMessage.className = "status-msg error";
+    } finally {
+      // G. Aktifkan kembali tombol setelah proses selesai
+      btnFetch.disabled = false;
+    }
   };
 
-  // 3. Fungsi menampilkan daftar tugas ke layar
-  const renderTasks = () => {
-    const tasks = getTasks();
-    todoList.innerHTML = "";
+  // 3. Fungsi Render Kartu Pengguna ke DOM
+  const renderUsers = (users) => {
+    userList.innerHTML = "";
 
-    // Sinkronisasi counter setiap kali re-render
-    updateTaskCounter(tasks);
-
-    if (tasks.length === 0) {
-      todoList.innerHTML = `<li style="text-align: center; color: #64748b; font-size: 14px; padding: 12px 0;">Belum ada tugas tersimpan.</li>`;
-      return;
-    }
-
-    tasks.forEach((task, index) => {
-      const li = document.createElement("li");
-      li.className = `todo-item ${task.completed ? "completed" : ""}`;
-      li.innerHTML = `
-        <span class="todo-text">${task.text}</span>
-        <div class="todo-actions">
-          <button class="action-btn complete-btn" data-index="${index}">
-            ${task.completed ? "Batal" : "Selesai"}
-          </button>
-          <button class="action-btn delete-btn" data-index="${index}">
-            Hapus
-          </button>
-        </div>
+    users.forEach((user) => {
+      const card = document.createElement("div");
+      card.className = "user-card";
+      card.innerHTML = `
+        <div class="user-name">${user.name}</div>
+        <div class="user-email">${user.email}</div>
+        <div class="user-company">${user.company.name}</div>
       `;
-      todoList.appendChild(li);
+      userList.appendChild(card);
     });
   };
 
-  // 4. Tambah tugas saat formulir dikirim
-  todoForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const taskText = taskInput.value.trim();
-
-    if (taskText.length < 3) {
-      taskInput.classList.add("error");
-      inputError.style.display = "block";
-      return;
-    }
-
-    taskInput.classList.remove("error");
-    inputError.style.display = "none";
-
-    const tasks = getTasks();
-    tasks.push({ text: taskText, completed: false });
-    saveTasks(tasks);
-
-    taskInput.value = "";
-    renderTasks();
-  });
-
-  // 5. Delegasi event untuk tombol Selesai dan Hapus
-  todoList.addEventListener("click", (e) => {
-    const index = e.target.dataset.index;
-    if (index === undefined) return;
-
-    const tasks = getTasks();
-
-    if (e.target.classList.contains("complete-btn")) {
-      tasks[index].completed = !tasks[index].completed;
-      saveTasks(tasks);
-      renderTasks();
-    } else if (e.target.classList.contains("delete-btn")) {
-      // Fitur 3: Konfirmasi dialog sebelum menghapus tugas
-      const confirmed = confirm("Apakah Anda yakin ingin menghapus tugas ini?");
-      if (confirmed) {
-        tasks.splice(index, 1);
-        saveTasks(tasks);
-        renderTasks();
-      }
-    }
-  });
-
-  // Fitur 2: Bersihkan tugas yang sudah berstatus selesai
-  clearCompletedBtn.addEventListener("click", () => {
-    const tasks = getTasks();
-    const activeTasks = tasks.filter((task) => !task.completed);
-
-    saveTasks(activeTasks);
-    renderTasks();
-  });
-
-  // Render pertama kali saat halaman dimuat
-  renderTasks();
+  // 4. Tambahkan Event Listener pada tombol
+  btnFetch.addEventListener("click", fetchUsers);
 });
